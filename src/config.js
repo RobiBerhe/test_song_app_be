@@ -1,0 +1,10 @@
+
+
+
+const config = {
+    PORT:'3040',
+    DB_URL:"mongodb://localhost:27017/songs_db"
+}
+
+
+module.exports = config;
