@@ -1,21 +1,14 @@
 const Song = require("../data/song.model");
 
-
-
-const listSongs = async (filter = {},query={page:1,limit:2}) => {
-    // return await Song.find({ ...filter });
-    const songs = await Song.find({...filter})
-                            .limit(query.limit)
-                            .skip((query.page -1)*query.limit)
-                            .exec();
-    return songs;
+const listSongs = async (filter = {}, query = { limit: 2, page: 1 }) => {
+    return await Song.paginate({...filter},{page:query.page,limit:query.limit})
 }
 
-const countSongs = async  (filter={})=>{
-    return await Song.countDocuments({...filter});
+const countSongs = async (filter = {}) => {
+    return await Song.countDocuments({ ...filter });
 }
 
-const countSongsDistinct = async  (fieldName)=>{
+const countSongsDistinct = async (fieldName) => {
     return (await Song.countDocuments({}).distinct(fieldName)).length;
 }
 
