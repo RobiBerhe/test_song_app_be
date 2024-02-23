@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express  = require('express');
 const config = require('./config');
 const loader = require('./loader')
@@ -9,4 +10,4 @@ app.use(cors());
 app.use(express.json());
 app.use(router);
 
-app.listen(config.PORT,()=> console.log(`Server started listening on ${config.PORT}`));
+app.listen(process.env.PORT,()=> console.log(`Server started listening on ${process.env.PORT}`));

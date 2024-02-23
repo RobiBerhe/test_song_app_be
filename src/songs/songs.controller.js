@@ -3,7 +3,9 @@ const { createSongValidator } = require("./song.schema");
 
 
 const listSongs = async (req, res) => {
-    const songs = await songService.listSongs();
+    const {page =1, limit=2} = req.query;
+    console.log("Page :> ",page, "and limit :> ",limit);
+    const songs = await songService.listSongs({},{page,limit});
     return res.json({ songs })
 }
 

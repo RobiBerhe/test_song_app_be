@@ -2,8 +2,13 @@ const Song = require("../data/song.model");
 
 
 
-const listSongs = async (filter = {}) => {
-    return await Song.find({ ...filter });
+const listSongs = async (filter = {},query={page:1,limit:2}) => {
+    // return await Song.find({ ...filter });
+    const songs = await Song.find({...filter})
+                            .limit(query.limit)
+                            .skip((query.page -1)*query.limit)
+                            .exec();
+    return songs;
 }
 
 const countSongs = async  (filter={})=>{
